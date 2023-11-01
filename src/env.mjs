@@ -8,6 +8,9 @@ export const env = createEnv({
    */
   server: {
     NODE_ENV: z.enum(["development", "test", "production"]),
+    DETA_API_KEY: z.string().min(1),
+    SELF_HOST: z.number().min(0).max(1).optional(),
+    SELF_HOST_PASSWORD: z.string().optional(),
   },
 
   /**
@@ -25,6 +28,9 @@ export const env = createEnv({
    */
   runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,
+    DETA_API_KEY: process.env.DETA_API_KEY,
+    SELF_HOST: Number(process.env.SELF_HOST),
+    SELF_HOST_PASSWORD: process.env.SELF_HOST_PASSWORD,
     // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
   },
   /**
