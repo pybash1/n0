@@ -11,7 +11,7 @@ import { initTRPC } from "@trpc/server";
 import { type CreateNextContextOptions } from "@trpc/server/adapters/next";
 import superjson from "superjson";
 import { ZodError } from "zod";
-import { N0Base } from "~/utils/schema";
+import { N0Base, N0BasePublic } from "~/utils/schema";
 
 /**
  * 1. CONTEXT
@@ -36,6 +36,7 @@ type CreateContextOptions = Record<string, never>;
 const createInnerTRPCContext = (_opts: CreateContextOptions) => {
   return {
     db: N0Base,
+    pdb: N0BasePublic,
   };
 };
 
