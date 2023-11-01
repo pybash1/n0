@@ -17,5 +17,10 @@ const N0SelfHostBaseSchema = z.object({
 
 export const N0Base = Deta(env.DETA_API_KEY).TypedBase(
   "n0",
-  env.SELF_HOST ? N0SelfHostBaseSchema : N0BaseSchema,
+  N0SelfHostBaseSchema,
+);
+
+export const N0BasePublic = Deta(env.DETA_API_KEY).TypedBase(
+  "n0-public",
+  N0BaseSchema,
 );

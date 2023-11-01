@@ -46,7 +46,7 @@ export const determineColor = (
   else if (percent <= 80) return fixed || "bg-green-300 cursor-pointer";
   else if (percent <= 90) return fixed || "bg-green-400 cursor-pointer";
   else if (percent <= 100) return fixed || "bg-green-500 cursor-pointer";
-  return fixed;
+  return fixed || "bg-gray-500 cursor-not-allowed";
 };
 
 // logic borrowed and modified from: https://stackoverflow.com/a/4156516
