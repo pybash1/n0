@@ -16,6 +16,8 @@ Here's the environment variable setup:
 
 ### Env
 
+You need a [Deta](https://deta.space) Collections data key for the app to work. Get it by signing up on Deta and following their documentation.
+
 ```sh
 # Deta
 DETA_API_KEY="<YOUR_DETA_KEY>"
