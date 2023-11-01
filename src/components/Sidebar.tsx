@@ -1,15 +1,18 @@
-import { MONTHS, DAYS } from "~/utils/constants";
+import { MONTHS, DAYS, uuid } from "~/utils/constants";
 import Task from "./Task";
 import { api } from "~/utils/api";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 const Sidebar = () => {
-  // const [date] = useState(new Date());
   const [task, setTask] = useState("");
+  const [userId, setUserId] = useState<string>();
+  const { data: selfHosted } = api.tasks.selfHosted.useQuery();
   const { mutateAsync: createTask } = api.tasks.create.useMutation();
   const { mutateAsync: initTask } = api.tasks.init.useMutation();
-  const { data: tasks, isLoading } = api.tasks.getAll.useQuery();
+  const { data: tasks, isLoading } = api.tasks.getAll.useQuery(
+    selfHosted ? {} : { user: userId },
+  );
 
   const getDone = (task: {
     key: string;
@@ -21,10 +24,18 @@ const Sidebar = () => {
       task.days[`${day.getDate()}-${day.getMonth()}-${day.getFullYear()}`];
 
     if (typeof status !== "boolean")
-      void initTask({ id: task.key, date: new Date() });
+      void initTask({ id: task.key, date: new Date(), user: userId });
 
     return status ?? false;
   };
+
+  useEffect(() => {
+    if (!localStorage.getItem("userid")) {
+      localStorage.setItem("userid", uuid());
+    }
+
+    setUserId(localStorage.getItem("userid")!);
+  }, [selfHosted]);
 
   return (
     <aside className="sticky top-0 flex h-screen flex-col gap-10 bg-gray-700 py-8">
@@ -41,7 +52,7 @@ const Sidebar = () => {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          void toast.promise(createTask({ task, done: false }), {
+          void toast.promise(createTask({ task, done: false, user: userId }), {
             success: "Created habit!",
             error: "Failed to create habit!",
             loading: "Creating...",

@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { VT323 } from "next/font/google";
 import { api } from "~/utils/api";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Sidebar from "~/components/Sidebar";
 import {
   calculateMonthlyPercentage,
@@ -11,14 +11,20 @@ import {
   getLeastCompletedHabit,
 } from "~/utils/date";
 import toast from "react-hot-toast";
+import { uuid } from "~/utils/constants";
 
 const monospace = VT323({ weight: ["400"], subsets: ["latin"] });
 
 export default function Home() {
   const [lookback, setLookback] = useState<Date>();
-  const { data: tasks } = api.tasks.getAll.useQuery();
+  const [userId, setUserId] = useState<string>();
+  const { data: selfHosted, isLoading } = api.tasks.selfHosted.useQuery();
+  const { data: tasks } = api.tasks.getAll.useQuery(
+    selfHosted ? {} : { user: userId },
+  );
   const { data: stats } = api.tasks.get.useQuery({
     date: lookback ?? new Date(),
+    user: userId,
   });
 
   const getDone = (
@@ -32,6 +38,34 @@ export default function Home() {
       false
     );
   };
+
+  useEffect(() => {
+    if (!localStorage.getItem("userid")) {
+      localStorage.setItem("userid", uuid());
+    }
+
+    setUserId(localStorage.getItem("userid")!);
+  }, [selfHosted]);
+
+  if ((!selfHosted || isLoading) && !userId) {
+    return (
+      <>
+        <Head>
+          <title>n0 - No Zero Days</title>
+          <meta
+            name="description"
+            content="Fix yoru life tool, built for @soulninja"
+          />
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
+        <main
+          className={`${monospace.className} flex min-h-screen items-center justify-center bg-gray-800 font-mono text-xl text-white`}
+        >
+          Loading...
+        </main>
+      </>
+    );
+  }
 
   return (
     <>
