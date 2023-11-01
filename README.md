@@ -1,28 +1,29 @@
-# Create T3 App
+# n0
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+**n0** or No Zero Days is a type of habit tracker or habit streaks tracker primarily meant to be self hosted.
+Originally built for [@soulninja](https://twitter.com/_soulninja), later made open source.
 
-## What's next? How do I make an app with this?
+---
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+### How to Self Host
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+<p align="center"><a href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fpybash1%2Fn0&env=SELF_HOST,DETA_API_KEY&envDescription=These%20environment%20variables%20are%20required%20to%20deploy%20this%20application.&envLink=https%3A%2F%2Fgithub.com%2Fpybash1%2Fn0%23env&project-name=n0&repository-name=n0&demo-title=n0%20Demo&demo-description=Here's%20a%20public%20demo%20of%20how%20n0%20works.&demo-url=https%3A%2F%2Fn0.pybash.xyz"><img src="https://vercel.com/button" alt="Deploy with Vercel"/></a>
+</p>
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+The easiest way to self host this is on [Vercel](https://vercel.com). You can do so simply by clicking the button above, and configuring the environment variables. You can also, manually clone the repository, and deploy to Vercel, but if you're really gonna do that, I'll assume you know what you're doing and so I'm not gonna provide instructions for that(I'm also lazy).
 
-## Learn More
+Here's the environment variable setup:
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+### Env
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+```sh
+# Deta
+DETA_API_KEY="<YOUR_DETA_KEY>"
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+# Self Host
+SELF_HOST=1 # 1 means true, it wont work if its set to 0
+```
 
-## How do I deploy this?
+---
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+Now, if you're gonna deploy this to something other than Vercel(I don't know why you would), then you're on you own. Firstly, because I'm too lazy write the instructions, and also because you shouldn't.
