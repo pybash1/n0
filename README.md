@@ -3,6 +3,8 @@
 **n0** or No Zero Days is a type of habit tracker or habit streaks tracker primarily meant to be self hosted.
 Originally built for [@soulninja](https://twitter.com/_soulninja), later made open source.
 
+A Public version is available [here](https://n0.pybash.xyz). But keep in mind, data stored is permanent(except if i wish to delete), but data is accessible only via your randomly generated user id. This id is auto generated when you first visit the site and resides at `localStorage.userid`. If you lose this id, your data cannot be retrieved. [ this applies to the public version only. ]
+
 ---
 
 ### How to Self Host

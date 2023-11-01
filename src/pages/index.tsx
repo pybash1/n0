@@ -54,7 +54,7 @@ export default function Home() {
           <title>n0 - No Zero Days</title>
           <meta
             name="description"
-            content="Fix yoru life tool, built for @soulninja"
+            content="Fix your life tool, built for @soulninja, later open sourced."
           />
           <link rel="icon" href="/favicon.ico" />
         </Head>
